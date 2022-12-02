@@ -28,8 +28,8 @@ def part2(file):
     return score 
 
 def main():
-    file = open("day2.txt", "r")
-    file2 = open("day2.txt", "r")
+    file = open("../input/day2.txt", "r")
+    file2 = open("../input/day2.txt", "r")
     
     print(part1(file))
     print(part2(file2))

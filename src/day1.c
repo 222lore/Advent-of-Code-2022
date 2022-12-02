@@ -52,8 +52,8 @@ int part2(FILE *file) {
 }
 
 int main() {
-    FILE *file = fopen("day1.txt", "r");
-    FILE *file2 = fopen("day1.txt", "r");
+    FILE *file = fopen("../input/day1.txt", "r");
+    FILE *file2 = fopen("../input/day1.txt", "r");
     if (!file) {
         printf("File cannot be read");
         return 1;
