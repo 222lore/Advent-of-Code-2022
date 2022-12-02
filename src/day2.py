@@ -31,8 +31,8 @@ def main():
     file = open("../input/day2.txt", "r")
     file2 = open("../input/day2.txt", "r")
     
-    print(part1(file))
-    print(part2(file2))
+    print("Part 1: " + str(part1(file)))
+    print("Part 2: " + str(part2(file2)))
 
 
 if __name__ == "__main__": main()
