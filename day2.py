@@ -12,7 +12,7 @@ def part1(file):
         line = file.readline()
 
     return score 
-
+ 
 def part2(file):
     line = file.readline()
     result = [0, 3, 6]
