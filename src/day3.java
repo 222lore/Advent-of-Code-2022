@@ -18,13 +18,10 @@ public class day3 {
 	}
  
 	private static int part1(Scanner in) {
-        // String first = "";
-        // String second = "";
         int sum = 0;
 
         while (in.hasNextLine()) {
             ArrayList<String> first = new ArrayList<>();
-            ArrayList<String> dups = new ArrayList<>();
             String line = in.nextLine();
 
             String half = line.substring(0, line.length()/2);
@@ -36,14 +33,12 @@ public class day3 {
 
             for (int i = 0; i < second.length(); i++) {
                 if (first.contains(second.substring(i, i+1))) {
-                    // System.out.println(second.substring(i, i+1));
+                    /* First half of line contains char at i in second half of line */
                     int add = ((second.substring(i, i+1).toUpperCase()).equals(second.substring(i, i+1))) ? 58 : 0;
                     sum += (int) second.charAt(i) - 96 + add;
-                    // System.out.println(second.charAt(i) + " " + ((int) second.charAt(i)) + " " + ((int) second.charAt(i) - 96 + add));
                     break;
                 }
             }
-
         }
 
         return sum;
@@ -72,12 +67,12 @@ public class day3 {
             for (int i = 0; i < first.size(); i++) {
                 String chr = first.get(i);
                 if (second.contains(chr) && third.contains(chr)) {
+                    /* First line contains char at i in second and third line */
                     int add = ((chr.toUpperCase()).equals(chr)) ? 58 : 0;
                     sum += (int) chr.charAt(0) - 96 + add;
                     break;
                 }
             }
-
         }
 
         return sum;

@@ -9,6 +9,7 @@ int part1(FILE *file) {
     char line[100];
     while (fgets(line, 100, file) != NULL) {
         if (strcmp(line, "\n") == 0) {
+            /* If the current elf's calories is more than the global most calories, update the global most calories */
             most_calories = (elf_calories > most_calories) ? elf_calories : most_calories;
             elf_calories = 0;
             continue;
@@ -31,15 +32,18 @@ int part2(FILE *file) {
     while (fgets(line, 100, file) != NULL) {
         if (strcmp(line, "\n") == 0) {
             if (elf_calories >= top3[0]) {
+                /* If the current elf's calories is more than the global #1 most calories, update the global #1, #2, #3 most calories */
                 top3[2] = top3[1];
                 top3[1] = top3[0];
                 top3[0] = elf_calories;
             }
             else if (elf_calories >= top3[1]) {
+                /* If the current elf's calories is more than the global #2 most calories, update the global #2, #3 most calories */
                 top3[2] = top3[1];
                 top3[1] = elf_calories;
             }
             else if (elf_calories >= top3[2]) {
+                /* If the current elf's calories is more than the global #3 most calories, update the global #3 most calories */
                 top3[2] = elf_calories;
             }
             elf_calories = 0;
