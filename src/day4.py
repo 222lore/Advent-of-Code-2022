@@ -11,6 +11,7 @@ def part1(file):
         min2 = (int) (second[0])
         max2 = (int) (second[1])
 
+        # Check if the first range fully encloses the second range, or if the second range fully encloses the first range
         if ((min1 <= min2 and max1 >= max2) or (min2 <= min1 and max2 >= max1)):
             score += 1
 
@@ -31,6 +32,7 @@ def part2(file):
         min2 = (int) (second[0])
         max2 = (int) (second[1])
 
+        # Check if the first range partially encloses the second range, or if the second range partially encloses the first range
         if ((min1 <= min2 and max1 >= min2) or (min1 <= max2 and max1 >= max2) or (min2 <= min1 and max2 >= min1) or (min2 <= max1 and max2 >= max1)):
             score += 1
 
