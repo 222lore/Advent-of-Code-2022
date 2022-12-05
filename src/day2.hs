@@ -1,3 +1,13 @@
+{-
+    Day 2
+
+    1st Star: 03:01:30 Rank: 31984
+    2nd Star: 03:12:32 Rank: 29624
+
+    Did today also a bit late. Made my own ascii value function and had a lot 
+    of pattern matching/if statements, but it was fun to de-rust my Haskell.
+-}
+
 import System.IO 
 
 -- | fixes output of words function for this problem

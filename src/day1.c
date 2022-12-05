@@ -1,3 +1,12 @@
+/*
+ * Day 1
+ *
+ * 1st Star: 23:02:31 Rank: 127253
+ * 2nd Star: 23:08:49 Rank: 122199
+ * 
+ * Started a day late lol. This day was just "search for max value, if new max value then update max value."
+ */
+
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>

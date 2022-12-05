@@ -1,3 +1,12 @@
+"""
+Day 4
+
+1st Star: 00:12:22 Rank: 5890
+2nd Star: 00:14:00 Rank: 4315
+
+Both parts were just one long if statement checking for overlap(s). 
+"""
+
 def part1(file):
     line = file.readline()
     score = 0
