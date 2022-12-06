@@ -1,3 +1,12 @@
+/*
+ * Day 3
+ * 
+ * 1st Star: 00:12:01 Rank: 3780
+ * 2nd Star: 00:17:42 Rank: 3072
+ * 
+ * Not much going on today other than the display of my love array lists.
+ */
+
 import java.io.*;
 import java.util.*;
  

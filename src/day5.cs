@@ -1,3 +1,12 @@
+/*
+    Day 5
+
+    1st Star: 00:21:22 Rank: 3127
+    2nd Star: 00:24:05 Rank: 2762
+
+    Didn't even try to parse the stack setup, just hard coded it.
+    The rest of today was using stacks and coding in C# (?) for some reason.
+*/
 using System;
 using System.Collections.Generic;
 
