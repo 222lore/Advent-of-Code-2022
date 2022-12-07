@@ -16,6 +16,9 @@ day5: ../src/day5.cs
 day6: ../src/day6.cpp
 	g++ -o day6 ../src/day6.cpp
 
+day7: ../src/day7.java
+	java ../src/day7.java
+
 clean:
 	rm ../src/day2.o
 	rm ../src/day2.hi
