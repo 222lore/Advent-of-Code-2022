@@ -13,7 +13,8 @@ import java.util.*;
 public class day3 {	
 	public static void main(String[] args) {
         try {
-            File file = new File("/home/student/git/Advent-of-Code-2022/input/day3.txt");
+            File file = new File("C:\\Users\\loren\\GitHub\\Advent-of-Code-2022\\input\\day3.txt");
+            // File file = new File("/home/student/git/Advent-of-Code-2022/input/day3.txt");
             Scanner in = new Scanner(file);
             Scanner in2 = new Scanner(file);
 
