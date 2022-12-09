@@ -1,10 +1,12 @@
 /*
  * Day 9
  * 
- * 1st Star: Rank: 
- * 2nd Star: Rank: 
+ * 1st Star: 00:44:20 Rank: 6399 
+ * 2nd Star: 00:55:56 Rank: 3893
  * 
- * 
+ * It is very easy to misspell variable names when they are two characters long.
+ * I had a very messy solution at first (9 variables each for the x and y pos
+ * of all the tails for part 2, and using a 2d array) but cleaned it up a bit.
  */
 
 import java.io.*;
@@ -27,291 +29,184 @@ public class day9 {
 	}
     
     private static int part1(Scanner in) {
-        int GRID_SIZE = 50000;
-        int xH = GRID_SIZE/2;
-        int yH = GRID_SIZE/2;
-        int xT = xH;
-        int yT = yH;
-        boolean[][] grid = new boolean[GRID_SIZE][GRID_SIZE]; // very bad practice
-        int count = 0;
+        int xH = 0;
+        int yH = 0;
+        int[] tails = new int[] {xH, yH};
+        int endTail = 0; // Only 1 tail for part 1
+        ArrayList<String> positions = new ArrayList<>();
 
-        grid[xT][yT] = true;
         while (in.hasNextLine()) {
             String line = in.nextLine();
             String[] commands = line.split(" ");
             int move = Integer.parseInt(commands[1]);
+
+            // Move head down
             if (commands[0].equals("D")) {
                 for (int i = 0; i < move; i++) {
                     yH += 1;
                     
-                    int[] movement = moveTail(xH, yH, xT, yT);
-                    xT = movement[0];
-                    yT = movement[1];
-                    grid[xT][yT] = true;
+                    tails = moveTails(xH, yH, tails); // Update tail
+                    String moveStr = tails[endTail] + " " + tails[endTail + 1];
+                    if (!positions.contains(moveStr)) positions.add(moveStr); // Update unique tail positions
                 }
             }
 
-            if (commands[0].equals("U")) {
+            // Move head up
+            else if (commands[0].equals("U")) {
                 for (int i = 0; i < move; i++) {
                     yH -= 1;
                     
-                    int[] movement = moveTail(xH, yH, xT, yT);
-                    xT = movement[0];
-                    yT = movement[1];
-                    grid[xT][yT] = true;
+                    tails = moveTails(xH, yH, tails); 
+                    String moveStr = tails[endTail] + " " + tails[endTail + 1];
+                    if (!positions.contains(moveStr)) positions.add(moveStr); 
                 }
             }
 
-            if (commands[0].equals("R")) {
+            // Move head right
+            else if (commands[0].equals("R")) {
                 for (int i = 0; i < move; i++) {
                     xH += 1;
                     
-                    int[] movement = moveTail(xH, yH, xT, yT);
-                    xT = movement[0];
-                    yT = movement[1];
-                    grid[xT][yT] = true;
+                    tails = moveTails(xH, yH, tails); 
+                    String moveStr = tails[endTail] + " " + tails[endTail + 1];
+                    if (!positions.contains(moveStr)) positions.add(moveStr);
                 }
             }
 
-            if (commands[0].equals("L")) {
+            // Move head left
+            else if (commands[0].equals("L")) {
                 for (int i = 0; i < move; i++) {
                     xH -= 1;
                     
-                    int[] movement = moveTail(xH, yH, xT, yT);
-                    xT = movement[0];
-                    yT = movement[1];
-                    grid[xT][yT] = true;
+                    tails = moveTails(xH, yH, tails); 
+                    String moveStr = tails[endTail] + " " + tails[endTail + 1];
+                    if (!positions.contains(moveStr)) positions.add(moveStr);
                 }
             }
         }
         
-        for (int i = 0; i < GRID_SIZE; i++) {
-            for (int j = 0; j < GRID_SIZE; j++) {
-                if (grid[i][j]) count++;
-            }
-        }
-
-        return count;
+        return positions.size(); // Return number of unique positions the tail has been
     }
 
 	private static int part2(Scanner in) {
-        int GRID_SIZE = 50000;
-        int xH = GRID_SIZE/2;
-        int yH = GRID_SIZE/2;
-        int x1 = xH;
-        int y1 = yH;
-        int x2 = xH;
-        int y2 = yH;
-        int x3 = xH;
-        int y3 = yH;
-        int x4 = xH;
-        int y4 = yH;
-        int x5 = xH;
-        int y5 = yH;
-        int x6 = xH;
-        int y6 = yH;
-        int x7 = xH;
-        int y7 = yH;
-        int x8 = xH;
-        int y8 = yH;
-        int x9 = xH;
-        int y9 = yH;
+        int xH = 0;
+        int yH = 0;
+        int[] tails = new int[] {xH, yH, xH, yH, xH, yH, xH, yH, xH, yH, xH, yH, xH, yH, xH, yH, xH, yH};
+        int endTail = 16; // 9th tail, (9-1) * 2
+        ArrayList<String> positions = new ArrayList<>();
 
-        boolean[][] grid = new boolean[GRID_SIZE][GRID_SIZE]; // very bad practice
-        int count = 0;
-
-        grid[x9][y9] = true;
         while (in.hasNextLine()) {
             String line = in.nextLine();
             String[] commands = line.split(" ");
             int move = Integer.parseInt(commands[1]);
+
+            // Move head down
             if (commands[0].equals("D")) {
                 for (int i = 0; i < move; i++) {
                     yH += 1;
                     
-                    int[] movement = moveTail(xH, yH, x1, y1);
-                    x1 = movement[0];
-                    y1 = movement[1];
-                    movement = moveTail(x1, y1, x2, y2);
-                    x2 = movement[0];
-                    y2 = movement[1];
-                    movement = moveTail(x2, y2, x3, y3);
-                    x3 = movement[0];
-                    y3 = movement[1];
-                    movement = moveTail(x3, y3, x4, y4);
-                    x4 = movement[0];
-                    y4 = movement[1];
-                    movement = moveTail(x4, y4, x5, y5);
-                    x5 = movement[0];
-                    y5 = movement[1];
-                    movement = moveTail(x5, y5, x6, y6);
-                    x6 = movement[0];
-                    y6 = movement[1];
-                    movement = moveTail(x6, y6, x7, y7);
-                    x7 = movement[0];
-                    y7 = movement[1];
-                    movement = moveTail(x7, y7, x8, y8);
-                    x8 = movement[0];
-                    y8 = movement[1];
-                    movement = moveTail(x8, y8, x9, y9);
-                    x9 = movement[0];
-                    y9 = movement[1];
-                    grid[x9][y9] = true;
+                    tails = moveTails(xH, yH, tails); // Update tails
+                    String moveStr = tails[endTail] + " " + tails[endTail + 1];
+                    if (!positions.contains(moveStr)) positions.add(moveStr); // Update unique end of tail positions
                 }
             }
 
-            if (commands[0].equals("U")) {
+            // Move head up
+            else if (commands[0].equals("U")) {
                 for (int i = 0; i < move; i++) {
                     yH -= 1;
                     
-                    int[] movement = moveTail(xH, yH, x1, y1);
-                    x1 = movement[0];
-                    y1 = movement[1];
-                    movement = moveTail(x1, y1, x2, y2);
-                    x2 = movement[0];
-                    y2 = movement[1];
-                    movement = moveTail(x2, y2, x3, y3);
-                    x3 = movement[0];
-                    y3 = movement[1];
-                    movement = moveTail(x3, y3, x4, y4);
-                    x4 = movement[0];
-                    y4 = movement[1];
-                    movement = moveTail(x4, y4, x5, y5);
-                    x5 = movement[0];
-                    y5 = movement[1];
-                    movement = moveTail(x5, y5, x6, y6);
-                    x6 = movement[0];
-                    y6 = movement[1];
-                    movement = moveTail(x6, y6, x7, y7);
-                    x7 = movement[0];
-                    y7 = movement[1];
-                    movement = moveTail(x7, y7, x8, y8);
-                    x8 = movement[0];
-                    y8 = movement[1];
-                    movement = moveTail(x8, y8, x9, y9);
-                    x9 = movement[0];
-                    y9 = movement[1];
-                    grid[x9][y9] = true;
+                    tails = moveTails(xH, yH, tails);
+                    String moveStr = tails[endTail] + " " + tails[endTail + 1];
+                    if (!positions.contains(moveStr)) positions.add(moveStr);
                 }
             }
 
-            if (commands[0].equals("R")) {
+            // Move head right
+            else if (commands[0].equals("R")) {
                 for (int i = 0; i < move; i++) {
                     xH += 1;
                     
-                    int[] movement = moveTail(xH, yH, x1, y1);
-                    x1 = movement[0];
-                    y1 = movement[1];
-                    movement = moveTail(x1, y1, x2, y2);
-                    x2 = movement[0];
-                    y2 = movement[1];
-                    movement = moveTail(x2, y2, x3, y3);
-                    x3 = movement[0];
-                    y3 = movement[1];
-                    movement = moveTail(x3, y3, x4, y4);
-                    x4 = movement[0];
-                    y4 = movement[1];
-                    movement = moveTail(x4, y4, x5, y5);
-                    x5 = movement[0];
-                    y5 = movement[1];
-                    movement = moveTail(x5, y5, x6, y6);
-                    x6 = movement[0];
-                    y6 = movement[1];
-                    movement = moveTail(x6, y6, x7, y7);
-                    x7 = movement[0];
-                    y7 = movement[1];
-                    movement = moveTail(x7, y7, x8, y8);
-                    x8 = movement[0];
-                    y8 = movement[1];
-                    movement = moveTail(x8, y8, x9, y9);
-                    x9 = movement[0];
-                    y9 = movement[1];
-                    grid[x9][y9] = true;
+                    tails = moveTails(xH, yH, tails);
+                    String moveStr = tails[endTail] + " " + tails[endTail + 1];
+                    if (!positions.contains(moveStr)) positions.add(moveStr);
                 }
             }
 
-            if (commands[0].equals("L")) {
+            // Move head left
+            else if (commands[0].equals("L")) {
                 for (int i = 0; i < move; i++) {
                     xH -= 1;
                     
-                    int[] movement = moveTail(xH, yH, x1, y1);
-                    x1 = movement[0];
-                    y1 = movement[1];
-                    movement = moveTail(x1, y1, x2, y2);
-                    x2 = movement[0];
-                    y2 = movement[1];
-                    movement = moveTail(x2, y2, x3, y3);
-                    x3 = movement[0];
-                    y3 = movement[1];
-                    movement = moveTail(x3, y3, x4, y4);
-                    x4 = movement[0];
-                    y4 = movement[1];
-                    movement = moveTail(x4, y4, x5, y5);
-                    x5 = movement[0];
-                    y5 = movement[1];
-                    movement = moveTail(x5, y5, x6, y6);
-                    x6 = movement[0];
-                    y6 = movement[1];
-                    movement = moveTail(x6, y6, x7, y7);
-                    x7 = movement[0];
-                    y7 = movement[1];
-                    movement = moveTail(x7, y7, x8, y8);
-                    x8 = movement[0];
-                    y8 = movement[1];
-                    movement = moveTail(x8, y8, x9, y9);
-                    x9 = movement[0];
-                    y9 = movement[1];
-                    grid[x9][y9] = true;
+                    tails = moveTails(xH, yH, tails);
+                    String moveStr = tails[endTail] + " " + tails[endTail + 1];
+                    if (!positions.contains(moveStr)) positions.add(moveStr);
                 }
             }
         }
-        
-        for (int i = 0; i < GRID_SIZE; i++) {
-            for (int j = 0; j < GRID_SIZE; j++) {
-                if (grid[i][j]) count++;
-            }
-        }
 
-        return count;
+        return positions.size(); // Return number of unique positions the end of the tail has been
     }
 
+    // Return the position of the 1 tail following a head of a rope moving
     private static int[] moveTail(int xH, int yH, int xT, int yT) {
         int[] tail = new int[] {xT, yT};
 
+        // Tail is touching head
         if (Math.abs(xH - xT) <= 1 && Math.abs(yH - yT) <= 1) return tail;
 
+        // Tail is vertically far from head
         else if (xH == xT) {
             if (yH > yT) {
-                tail[1] = yT + 1;
+                tail[1]++;
             }
             else {
-                tail[1] = yT - 1;
+                tail[1]--;
             }
         }
+
+        // Tail is horizontally far from head
         else if (yH == yT) {
             if (xH > xT) {
-                tail[0] = xT + 1;
+                tail[0]++;
             }
             else {
-                tail[0] = xT - 1;
+                tail[0]--;
             }
         }
+
+        // Tail is diagonally far from head
         else {
             if (xH > xT) {
-                tail[0] = xT + 1;
+                tail[0]++;
             }
             else {
-                tail[0] = xT - 1;
+                tail[0]--;
             }
             
             if (yH > yT) {
-                tail[1] = yT + 1;
+                tail[1]++;
             }
             else {
-                tail[1] = yT - 1;
+                tail[1]--;
             }
         }
 
         return tail;
+    }
+
+    // Return the positions of multiple tails following a head of a rope moving
+    private static int[] moveTails(int xH, int yH, int[] tails) {
+        int[] iTail = moveTail(xH, yH, tails[0], tails[1]);
+        tails[0] = iTail[0];
+        tails[1] = iTail[1];
+
+        for (int i = 0; i < tails.length-3; i += 2) {
+            iTail = moveTail(tails[i], tails[i+1], tails[i+2], tails[i+3]);
+            tails[i+2] = iTail[0];
+            tails[i+3] = iTail[1];
+        }
+
+        return tails;
     }
 }
