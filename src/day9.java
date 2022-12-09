@@ -87,8 +87,8 @@ public class day9 {
         
         return positions.size(); // Return number of unique positions the tail has been
     }
-
-	private static int part2(Scanner in) {
+    
+    private static int part2(Scanner in) {
         int xH = 0;
         int yH = 0;
         int[] tails = new int[] {xH, yH, xH, yH, xH, yH, xH, yH, xH, yH, xH, yH, xH, yH, xH, yH, xH, yH};
