@@ -1,10 +1,10 @@
 /*
  * Day 8
  * 
- * 1st Star:  Rank: 
- * 2nd Star:  Rank: 
+ * 1st Star: 00:32:28 Rank: 6056
+ * 2nd Star: 00:50:15 Rank: 5097
  * 
- * 
+ * Coding is hard when it is unreadable and a bunch of loops.
  */
 
 import java.io.*;
@@ -28,33 +28,30 @@ public class day8 {
 	}
  
 	private static int part1(Scanner in) {
-        int width = 99;
-        int height = 99;
+        int width = 99; // Hardcoded width
+        int height = 99; // Hardcoded height
         int visible = 0;
         int i = 0;
 
         int[][] trees = new int[height][width];
-        boolean[][] visibleTree = new boolean[height][width];
 
         while (in.hasNextLine()) {
             String line = in.nextLine();
             for (int j = 0; j < line.length(); j++) {
                 trees[i][j] = Integer.parseInt(line.substring(j, j+1));
-                visibleTree[i][j] = false;
             }
             i++;
         }
-        //System.out.println(trees[1][1]);
+
         boolean canSee = false;
         for (int r = 0; r < height; r++) {
             for (int c = 0; c < width; c++) {
 
-                //System.out.println("r " + r + " c " + c);
                 if (r == 0 || r == height - 1 || c == 0 || c == width - 1) {
                     visible++;
-                    visibleTree[r][c] = true;
                 }
                 else {
+                    // Check if all trees above current tree are shorter
                     canSee = true;
                     for (int u = r-1; u >= 0; u--) {
                         if (trees[r][c] <= trees[u][c]) {
@@ -63,11 +60,11 @@ public class day8 {
                         }
                     }
                     if (canSee) {
-                        //System.out.println("1^");
                         visible++;
                         continue;
                     }
                     
+                    // Check if all trees below current tree are shorter
                     canSee = true;
                     for (int d = r+1; d < height; d++) {
                         if (trees[r][c] <= trees[d][c]) {
@@ -76,11 +73,11 @@ public class day8 {
                         }
                     }
                     if (canSee) {
-                        //System.out.println("2^");
                         visible++;
                         continue;
                     }
 
+                    // Check if all trees to the left of current tree are shorter
                     canSee = true;
                     for (int left = c-1; left >= 0; left--) {
                         if (trees[r][c] <= trees[r][left]) {
@@ -89,11 +86,11 @@ public class day8 {
                         }
                     }
                     if (canSee) {
-                        //System.out.println("3^");
                         visible++;
                         continue;
                     }
 
+                    // Check if all trees to the right of current tree are shorter
                     canSee = true;
                     for (int right = c+1; right < width; right++) {
                         if (trees[r][c] <= trees[r][right]) {
@@ -102,60 +99,9 @@ public class day8 {
                         }
                     }
                     if (canSee) {
-                        //System.out.println("4^");
                         visible++;
                         continue;
                     }
-                    // canSee = true;
-                    // for (int u = r-1; u >= 0; u--) {
-                    //     if (trees[u][c] >= trees[u+1][c]) {
-                    //         canSee = false;
-                    //         break;
-                    //     }
-                    // }
-                    // if (canSee) {
-                    //     visible++;
-                    //     continue;
-                    // }
-                    
-                    // canSee = true;
-                    // for (int d = r+1; d < height; d++) {
-                    //     if (trees[d][c] >= trees[d-1][c]) {
-                    //         canSee = false;
-                    //         break;
-                    //     }
-                    // }
-                    // if (canSee) {
-                    //     visible++;
-                    //     continue;
-                    // }
-
-                    // canSee = true;
-                    // for (int left = c-1; left >= 0; left--) {
-                    //     if (trees[r][left] >= trees[r][left+1]) {
-                    //         canSee = false;
-                    //         break;
-                    //     }
-                    // }
-                    // if (canSee) {
-                    //     visible++;
-                    //     continue;
-                    // }
-
-                    // canSee = true;
-                    // for (int right = c+1; right < width; right++) {
-                    //     if (trees[r][right] >= trees[r][right-1]) {
-                    //         if (c == 1 && r == 2) {
-                    //             System.out.println(right);
-                    //         }
-                    //         canSee = false;
-                    //         break;
-                    //     }
-                    // }
-                    // if (canSee) {
-                    //     visible++;
-                    //     continue;
-                    // }
                 }
             }
         }
@@ -163,180 +109,82 @@ public class day8 {
         return visible;
     }
 
-    // private static boolean isVisible(boolean visibleTree[][], int startR, int startC) {
-    //     boolean visible = false;
-
-    //     if (visibleTree[startR-1][startC-1] || visibleTree[startR-1][startC] || visibleTree[startR-1][startC+1]
-    //         || visibleTree[startR][startC-1] || visibleTree[startR][startC+1]
-    //         || visibleTree[startR+1][startC-1] || visibleTree[startR+1][startC] || visibleTree[startR+1][startC+1]) {
-    //             return true;
-    //         }
-
-    //     return visible;
-    // }
-
     private static int part2(Scanner in) {
-        int width = 99;
-        int height = 99;
+        int width = 99; // Hardcoded width
+        int height = 99; // Hardcoded height
         int visible = 0;
         int max = 0;
         int i = 0;
 
         int[][] trees = new int[height][width];
-        boolean[][] visibleTree = new boolean[height][width];
 
         while (in.hasNextLine()) {
             String line = in.nextLine();
             for (int j = 0; j < line.length(); j++) {
                 trees[i][j] = Integer.parseInt(line.substring(j, j+1));
-                visibleTree[i][j] = false;
             }
             i++;
         }
-        //System.out.println(trees[1][1]);
-        boolean canSee = false;
+
         for (int r = 0; r < height; r++) {
             for (int c = 0; c < width; c++) {
-                if (visible > max) {
-                    max = visible;
-                    //System.out.println(r + " " + c);
-                }
+                // Update max value
+                if (visible > max) max = visible;
 
-                //System.out.println("r " + r + " c " + c);
-                if (r == 0 || r == height - 1 || c == 0 || c == width - 1) {
-                    //visible++;
-                    visibleTree[r][c] = true;
-                }
+                // Tree on edge will always be 0
+                if (r == 0 || r == height - 1 || c == 0 || c == width - 1) continue;
                 else {
                     visible = 0;
+
+                    // Check trees above current tree
                     int seeUp = 0;
-                    int seeDown = 0;
-                    int seeLeft = 0;
-                    int seeRight = 0;
-                    canSee = true;
                     for (int u = r-1; u >= 0; u--) {
 
                         if (trees[r][c] <= trees[u][c]) {
                             seeUp++;
-                            canSee = false;
                             break;
                         }
                         seeUp++;
                     }
                     
-                    // if (canSee) {
-                    //     //System.out.println("1^");
-                    //     visible++;
-                    //     continue;
-                    // }
-                    
-                    canSee = true;
+                    // Check trees below current tree  
+                    int seeDown = 0;
                     for (int d = r+1; d < height; d++) {
  
                         if (trees[r][c] <= trees[d][c]) {
                             seeDown++;
-                            canSee = false;
                             break;
                         }
                         seeDown++;
                     }
-                    // if (canSee) {
-                    //     //System.out.println("2^");
-                    //     visible++;
-                    //     continue;
-                    // }
 
-                    canSee = true;
+                    // Check trees to the left of current tree
+                    int seeLeft = 0;
                     for (int left = c-1; left >= 0; left--) {
    
                         if (trees[r][c] <= trees[r][left]) {
                             seeLeft++;
-                            canSee = false;
                             break;
                         }
                         seeLeft++;
                     }
-                    // if (canSee) {
-                    //     //System.out.println("3^");
-                    //     visible++;
-                    //     continue;
-                    // }
 
-                    canSee = true;
+                    // Check trees to the right of current tree
+                    int seeRight = 0;
                     for (int right = c+1; right < width; right++) {
               
                         if (trees[r][c] <= trees[r][right]) {
                             seeRight++;
-                            canSee = false;
                             break;
                         }
                         seeRight++;
                     }
-                    // if (canSee) {
-                    //     //System.out.println("4^");
-                    //     visible++;
-                    //     continue;
-                    // }
 
                     visible = seeUp * seeDown * seeLeft * seeRight;
-                    //if (visible == 2) System.out.println(r + " " + c + ", " + seeUp + " " + seeDown + " " + seeLeft + " " + seeRight);
-                    // canSee = true;
-                    // for (int u = r-1; u >= 0; u--) {
-                    //     if (trees[u][c] >= trees[u+1][c]) {
-                    //         canSee = false;
-                    //         break;
-                    //     }
-                    // }
-                    // if (canSee) {
-                    //     visible++;
-                    //     continue;
-                    // }
-                    
-                    // canSee = true;
-                    // for (int d = r+1; d < height; d++) {
-                    //     if (trees[d][c] >= trees[d-1][c]) {
-                    //         canSee = false;
-                    //         break;
-                    //     }
-                    // }
-                    // if (canSee) {
-                    //     visible++;
-                    //     continue;
-                    // }
-
-                    // canSee = true;
-                    // for (int left = c-1; left >= 0; left--) {
-                    //     if (trees[r][left] >= trees[r][left+1]) {
-                    //         canSee = false;
-                    //         break;
-                    //     }
-                    // }
-                    // if (canSee) {
-                    //     visible++;
-                    //     continue;
-                    // }
-
-                    // canSee = true;
-                    // for (int right = c+1; right < width; right++) {
-                    //     if (trees[r][right] >= trees[r][right-1]) {
-                    //         if (c == 1 && r == 2) {
-                    //             System.out.println(right);
-                    //         }
-                    //         canSee = false;
-                    //         break;
-                    //     }
-                    // }
-                    // if (canSee) {
-                    //     visible++;
-                    //     continue;
-                    // }
                 }
             }
         }
 
         return max;
     }
-
 }
-
-

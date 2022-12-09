@@ -3,9 +3,9 @@ I'm using this year's Advent of Code to play around in different languages and l
 
 |Language|Days|
 |---|---|
+|Java|Days 3, 7, and 8|
 |C|Day 1|
 |Haskell|Day 2|
-|Java|Day 3|
 |Python|Day 4|
 |C#|Day 5|
 |C++|Day 6|
