@@ -3,7 +3,7 @@ I'm using this year's Advent of Code to play around in different languages and l
 
 |Language|Days|
 |---|---|
-|Java|Days 3, 7, 8, and 9|
+|Java|Days 3, 7, 8, 9, 10, 11|
 |C|Day 1|
 |Haskell|Day 2|
 |Python|Day 4|
